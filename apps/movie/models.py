@@ -21,6 +21,9 @@ class Movie(BaseModel):
     language = models.CharField(max_length=50)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ["-created_at"]
+
 
 class Rating(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -42,6 +45,9 @@ class Rating(BaseModel):
         self.movie.total_rating = total_ratings
         self.movie.save(update_fields=["avg_rating", "total_rating"])
 
+    class Meta:
+        ordering = ["-created_at"]
+
 
 class ReportedMovie(BaseModel):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
@@ -53,3 +59,6 @@ class ReportedMovie(BaseModel):
         choices=AdminApproval.choices(),
         default=AdminApproval.PENDING.value,
     )
+
+    class Meta:
+        ordering = ["-created_at"]
