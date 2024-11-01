@@ -7,8 +7,7 @@ urlpatterns = [
     # --------------------------- JWT Token ------------------------ #
     path("token/refresh/", TokenRefreshView.as_view()),
     path("token/verify/", TokenVerifyView.as_view()),
-
     # --------------------------- Login & Logout ------------------------ #
-    path("login/", LoginViewSet.as_view({'post': 'create'}), name='login'),
-    path("logout/", LogoutViewSet.as_view({'post': 'create'}), name='logout')
+    path("login/", LoginViewSet.as_view({"post": "create"}), name="login"),
+    path("logout/", LogoutViewSet.as_view({"post": "create"}), name="logout"),
 ]
