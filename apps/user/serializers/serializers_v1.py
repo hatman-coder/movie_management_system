@@ -9,8 +9,8 @@ class UserListSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(read_only=True)
 
     @staticmethod
-    def get_name(obj):
-        return str(obj.get_full_name())
+    def get_name(obj) -> str:
+        return obj.get_full_name()
 
     class Meta:
         model = User

@@ -50,7 +50,10 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
-CUSTOM_APPS = ["apps.user"]
+CUSTOM_APPS = [
+    "apps.user",
+    "apps.movie"
+    ]
 
 INSTALLED_LIBRARIES = [
     "rest_framework",
@@ -181,7 +184,7 @@ AUTH_USER_MODEL = "user.User"
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Swagger",
-    "DESCRIPTION": "Django project",
+    "DESCRIPTION": "Movie Management System",
     "VERSION": "1.0.0",
     "SWAGGER_UI_SETTINGS": {
         "deepLinking": True,
