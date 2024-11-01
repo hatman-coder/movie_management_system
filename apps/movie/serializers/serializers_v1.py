@@ -19,7 +19,7 @@ class MovieCreateSerializer(serializers.ModelSerializer):
 class MovieUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = ["name", "description", "released_at", "duration", "genre", "language"]
+        fields = ["name", "description", "released_at", "duration", "genre", "language", "updated_at"]
 
 
 class MovieListSerializer(serializers.ModelSerializer):
@@ -29,7 +29,7 @@ class MovieListSerializer(serializers.ModelSerializer):
 
 
 class MovieRetrieveSerializer(serializers.ModelSerializer):
-    created_by = serializers.CharField(source="created_by.get_full_name()")
+    created_by = serializers.CharField(source="created_by.get_full_name")
 
     class Meta:
         model = Movie
@@ -62,7 +62,7 @@ class UpdateRatingSerializer(serializers.ModelSerializer):
 class RatedMovieListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating
-        fields = ["movie", "rating", "updated_at"]
+        fields = ["id", "movie", "rating", "updated_at"]
 
 
 class ReportMovieSerializer(serializers.ModelSerializer):

@@ -60,7 +60,7 @@ class MovieViewSet(viewsets.ModelViewSet):
 
     @extend_schema(tags=["Movie"])
     def my_movies(self, request, *args, **kwargs):
-        queryset = self.get_queryset().filter(user=request.user.id)
+        queryset = self.get_queryset().filter(created_by=request.user.id)
         page = self.paginate_queryset(queryset)
         serializer_class = (
             self.get_serializer_class()
@@ -117,9 +117,9 @@ class MovieViewSet(viewsets.ModelViewSet):
         if not instance:
             return Response({"message": "Movie not found"}, 400)
 
-        if instance.created_by != request.user.id:
+        if str(instance.created_by) != str(request.user):
             return Response(
-                {"message": "Only movies owned by you is permitted to update"}, 406
+                {"message": "You are only permitted to update movies that you own"}, 406
             )
         request.data["updated_at"] = datetime.datetime.now()
         serializer_class = self.get_serializer_class()
@@ -185,9 +185,9 @@ class RatingViewSet(viewsets.ModelViewSet):
         if not instance:
             return Response({"message": "Movies rank not found"}, 400)
 
-        if instance.user != request.user.id:
+        if str(instance.user) != str(request.user):
             return Response(
-                {"message": "You don’t own this movie! Update is prohibited"}, 406
+                {"message": "You are only permitted to update rank for the movies that you own"}, 406
             )
 
         serializer_class = self.get_serializer_class()
@@ -278,7 +278,7 @@ class ReportedMovieViewSet(viewsets.ModelViewSet):
         examples=[
             OpenApiExample(
                 "Review Report",
-                value={"acknowledged": "bool", "status": "approved/rejected"},
+                value={"acknowledged": "bool", "admin_approval": "approved/rejected"},
                 request_only=True,
             )
         ],
@@ -299,6 +299,6 @@ class ReportedMovieViewSet(viewsets.ModelViewSet):
         serializer = serializer_class(data=request.data, instance=reported_movie_obj)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message": "Report acknowledged"}, 202)
+            return Response({"message": "Report updated"}, 202)
         else:
             return Response(serializer.errors, 400)
