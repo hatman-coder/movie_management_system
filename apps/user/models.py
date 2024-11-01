@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from abstract.base_model import BaseModel
+from external.enum import UserRole
 
 
 class SuperUserManager(BaseUserManager):
@@ -31,6 +32,7 @@ class User(AbstractBaseUser, BaseModel, PermissionsMixin):
     username = models.CharField(max_length=30, unique=True, db_index=True)
     password = models.CharField(
         max_length=128, editable=False)
+    role = models.CharField(max_length=150, choices=UserRole.choices(), default=UserRole.USER.value)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
     profile_pic = models.ImageField(
         upload_to='profile_pic/', blank=True, null=True)
