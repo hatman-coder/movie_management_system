@@ -80,4 +80,4 @@ This is a Django-based Movie Management System that allows users to manage movie
 ## License
 
 This project is licensed under the MIT License.
-Copyright (c) 2024 Tahseen Rahman
+Copyright (c) 2024 Tahseen Rahman.

@@ -1,0 +1,17 @@
+services:
+  app:
+    container_name: movie_management
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    restart: unless-stopped
+
+    volumes:
+      - './media:/code/media'
+      - '/var/log/movie_management/logs:/code/logs'
+      - '/srv/www/movie_management/static:/srv/www/movie_management/static'
+      - '/srv/www/movie_management/media:/srv/www/movie_management/media'
+
+    ports:
+      - "9430:9430"
