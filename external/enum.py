@@ -88,3 +88,9 @@ class BaseEnum(Enum):
 class UserRole(BaseEnum):
     ADMIN = "admin"
     USER = "user"
+
+
+class AdminApproval(BaseEnum):
+    APPROVED = "approved"
+    PENDING = "pending"
+    REJECTED = "rejected"

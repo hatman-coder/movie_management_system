@@ -30,6 +30,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("user/v1/", include("apps.user.urls.urls_v1")),
     path("authentication/v1/", include("authentication.urls.urls_v1")),
+    path('movie/v1/', include('apps.movie.urls.urls_v1'))
 ] + swagger_urlpatterns
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
