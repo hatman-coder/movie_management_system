@@ -8,7 +8,7 @@ venv/
 #*/migrations/
 
 # Environment variables file
-.env
+#.env
 
 # Python packages
 *.pyc
