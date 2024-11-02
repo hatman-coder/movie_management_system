@@ -17,6 +17,12 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserListSerializer
     pagination_class = CustomPagination
 
+    def get_permissions(self):
+        if self.action in ["create_user", "create_admin", "user_list"]:
+            return []
+        else:
+            return [IsAuthenticated()]
+
     def get_queryset(self):
         return self.model_class.objects.all()
 
